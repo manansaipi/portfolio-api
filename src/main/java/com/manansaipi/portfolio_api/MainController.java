@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.manansaipi.portfolio_api.Models.Comment;
-import com.manansaipi.portfolio_api.Repository.CommentRepository;
 import com.manansaipi.portfolio_api.Service.CommentService;
 
 
