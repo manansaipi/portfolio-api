@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.manansaipi.portfolio_api.models.Comment;
-import com.manansaipi.portfolio_api.service.CommentService;
+import com.manansaipi.portfolio_api.models.comment.Comment;
+import com.manansaipi.portfolio_api.service.comment.CommentService;
 
 @RestController
 @RequestMapping("/api/comments")

@@ -1,11 +1,11 @@
-package com.manansaipi.portfolio_api.repository;
+package com.manansaipi.portfolio_api.repository.work;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.manansaipi.portfolio_api.models.Work;
+import com.manansaipi.portfolio_api.models.work.Work;
 
 @Repository
 public interface WorkRepository extends JpaRepository<Work, Long> {
-
+    
 }
