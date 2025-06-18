@@ -1,5 +1,7 @@
 package com.manansaipi.portfolio_api.models.post;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -18,9 +20,21 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "post_title", nullable = false )
+    private String postTitle;
     
-    @Column(nullable = false, name = "author")
+    @Column(name = "post_image", nullable = false )
+    private String postImage;
+
+    @Column(name = "post_date", nullable = true)
+    private LocalDate posDate;
+    
+    @Column(name = "author", nullable = false )
     private String author;
+
+    @Column(name = "author_img_url", nullable = false )
+    private String authorImgUrl;
 
   
 }
