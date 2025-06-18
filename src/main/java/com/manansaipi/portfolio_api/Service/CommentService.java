@@ -1,11 +1,11 @@
-package com.manansaipi.portfolio_api.Service;
+package com.manansaipi.portfolio_api.service;
 
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.manansaipi.portfolio_api.Models.Comment;
-import com.manansaipi.portfolio_api.Repository.CommentRepository;
+import com.manansaipi.portfolio_api.models.Comment;
+import com.manansaipi.portfolio_api.repository.CommentRepository;
 
 
 @Service
@@ -17,7 +17,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public List<Comment> response() {
+    public List<Comment> getAll() {
         return commentRepository.findAll();
     }
 }

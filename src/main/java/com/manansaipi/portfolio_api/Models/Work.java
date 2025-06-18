@@ -1,4 +1,4 @@
-package com.manansaipi.portfolio_api.Models;
+package com.manansaipi.portfolio_api.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Entity
 @Data @Getter @Setter
-@Table(name = "work")
+@Table(name = "works")
 public class Work {
     
     @Id
@@ -20,7 +20,7 @@ public class Work {
     private Long id;
     
     @Column(nullable = false, name = "company")
-    private String author;
+    private String company;
 
   
 }

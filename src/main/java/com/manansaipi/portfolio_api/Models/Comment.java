@@ -1,4 +1,4 @@
-package com.manansaipi.portfolio_api.Models;
+package com.manansaipi.portfolio_api.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "tb_comment", schema = "main")
+@Table(name = "comments", schema = "main")
 public class Comment {
     
     @Id

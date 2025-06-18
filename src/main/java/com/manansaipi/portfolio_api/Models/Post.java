@@ -1,4 +1,4 @@
-package com.manansaipi.portfolio_api.Models;
+package com.manansaipi.portfolio_api.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import lombok.Setter;
 
 @Entity
 @Data @Getter @Setter
-@Table(name = "tb_post", schema = "main")
+@Table(name = "posts", schema = "main")
 public class Post {
     
     @Id
