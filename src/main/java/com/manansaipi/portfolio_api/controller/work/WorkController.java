@@ -1,4 +1,4 @@
-package com.manansaipi.portfolio_api.controller.WorkController;
+package com.manansaipi.portfolio_api.controller.work;
 
 import java.util.List;
 
