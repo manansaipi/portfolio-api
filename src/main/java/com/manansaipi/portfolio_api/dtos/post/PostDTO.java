@@ -9,7 +9,7 @@ public class PostDTO {
     private Long id;
     private String postTitle;
     private String postImage;
-    private LocalDate posDate;
+    private LocalDate createdAt;
     private String author;
     private String authorImgUrl;
     private String content;

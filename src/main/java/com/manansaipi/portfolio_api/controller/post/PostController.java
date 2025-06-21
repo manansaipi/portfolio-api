@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 @RequestMapping("/api/posts")
+@CrossOrigin(origins = "http://localhost:5173")
 public class PostController {
 
     @Autowired
@@ -44,11 +46,18 @@ public class PostController {
         return postService.getById(id);
     }
     
-    // get comments by post id
-    // GET /api/posts/comments/{postId}
-    @GetMapping("/comments/{postId}")
+    // GET /api/posts/{postId}/comments
+    @GetMapping("/{postId}/comments")
     public List<PostCommentDTO> getCommentsByPostId(@PathVariable Long postId) {
         return postService.getCommentsByPostId(postId);
     }
-    
+
+    // to add new comment to post
+    // POST /api/posts/comment
+    @PostMapping("/comment")
+    public ResponseEntity<PostCommentDTO> addComment(@RequestBody PostCommentRequestDTO request) {
+        PostCommentDTO comment = postService.saveComment(request);
+        return ResponseEntity.ok(comment);
+    }
+
 }

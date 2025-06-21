@@ -30,8 +30,8 @@ public class Post {
     @Column(name = "post_image", nullable = false )
     private String postImage;
 
-    @Column(name = "post_date", nullable = true)
-    private LocalDate posDate;
+    @Column(name = "created_at", nullable = true)
+    private LocalDate createdAt;
     
     @Column(name = "author", nullable = false )
     private String author;

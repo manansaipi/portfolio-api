@@ -1,5 +1,6 @@
 package com.manansaipi.portfolio_api.service.post;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +38,7 @@ public class PostService {
         dto.setId(post.getId());
         dto.setPostTitle(post.getPostTitle());
         dto.setPostImage(post.getPostImage());
-        dto.setPosDate(post.getPosDate());
+        dto.setCreatedAt(post.getCreatedAt());
         dto.setAuthor(post.getAuthor());
         dto.setAuthorImgUrl(post.getAuthorImgUrl());
         dto.setContent(post.getContent());
@@ -55,7 +56,7 @@ public class PostService {
         dto.setId(post.getId());
         dto.setPostTitle(post.getPostTitle());
         dto.setPostImage(post.getPostImage());
-        dto.setPosDate(post.getPosDate());
+        dto.setCreatedAt(post.getCreatedAt());
         dto.setAuthor(post.getAuthor());
         dto.setAuthorImgUrl(post.getAuthorImgUrl());
         dto.setContent(post.getContent());
@@ -85,11 +86,14 @@ public class PostService {
         if (post.isEmpty()) {
             throw new RuntimeException("Post not found with id: " + request.getPostId());
         }
-
+        
         // 3. Create a new PostComment entity instance
         PostComment comment = new PostComment();
         comment.setPostId(post.get());// 4. Set the `postId` (which is actually the Post object itself because it's a @ManyToOne relation)
         comment.setComment(request.getComment());// 5. Set the comment text from the request
+        comment.setName(request.getName());
+        comment.setTotalLikes(0);
+        comment.setCreatedAt(LocalDate.now());
 
         // 6. Save the comment to the database using the repository
         PostComment saved = postCommentRepository.save(comment);
@@ -113,9 +117,26 @@ public class PostService {
                     dto.setId(comment.getId());
                     dto.setPostId(comment.getPostId().getId());
                     dto.setComment(comment.getComment());
+                    dto.setName(comment.getName());
+                    dto.setTotalLikes(comment.getTotalLikes());
+                    dto.setCreatedAt(comment.getCreatedAt());
                     return dto;
                 })
                 .collect(Collectors.toList());
     }
+
+    public List<PostCommentDTO> getAllComments(){
+        return postCommentRepository.findAll()
+                .stream()
+                .map(comment -> {
+                    PostCommentDTO dto = new PostCommentDTO();
+                    dto.setId(comment.getId());
+                    dto.setPostId(comment.getPostId().getId());
+                    dto.setComment(comment.getComment());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
 }
 
