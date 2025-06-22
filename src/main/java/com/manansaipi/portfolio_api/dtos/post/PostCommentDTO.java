@@ -1,6 +1,6 @@
 package com.manansaipi.portfolio_api.dtos.post;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
@@ -10,8 +10,7 @@ public class PostCommentDTO {
     private Long PostId;
     private String comment;
     private String name;
-    private int totalLikes;
-    private LocalDate createdAt;
-
-
+    private Integer totalLikes;
+    private LocalDateTime createdAt;
+    private Boolean isVerified;
 }

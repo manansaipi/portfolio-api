@@ -1,6 +1,6 @@
 package com.manansaipi.portfolio_api.service.post;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.manansaipi.portfolio_api.dtos.post.PostCommentDTO;
+import com.manansaipi.portfolio_api.dtos.post.PostCommentLikeRequestDTO;
 import com.manansaipi.portfolio_api.dtos.post.PostCommentRequestDTO;
 import com.manansaipi.portfolio_api.dtos.post.PostDTO;
 import com.manansaipi.portfolio_api.dtos.post.PostDetailDTO;
@@ -93,7 +94,7 @@ public class PostService {
         comment.setComment(request.getComment());// 5. Set the comment text from the request
         comment.setName(request.getName());
         comment.setTotalLikes(0);
-        comment.setCreatedAt(LocalDate.now());
+        comment.setCreatedAt(LocalDateTime.now());
 
         // 6. Save the comment to the database using the repository
         PostComment saved = postCommentRepository.save(comment);
@@ -110,7 +111,7 @@ public class PostService {
 
     // Get comments based on posts id
     public List<PostCommentDTO> getCommentsByPostId(Long postId){
-        return postCommentRepository.findByPostId_Id(postId)
+        return postCommentRepository.findByPostId_IdOrderByCreatedAtDesc(postId)
                 .stream()
                 .map(comment -> {
                     PostCommentDTO dto = new PostCommentDTO();
@@ -120,6 +121,7 @@ public class PostService {
                     dto.setName(comment.getName());
                     dto.setTotalLikes(comment.getTotalLikes());
                     dto.setCreatedAt(comment.getCreatedAt());
+                    dto.setIsVerified(comment.getIsVerified());
                     return dto;
                 })
                 .collect(Collectors.toList());
@@ -137,6 +139,39 @@ public class PostService {
                 })
                 .collect(Collectors.toList());
     }
+
+    // Like Comment
+    public PostCommentDTO likeComment(PostCommentLikeRequestDTO request) {
+    // 1. Find the comment by its ID
+    Optional<PostComment> commentOptional = postCommentRepository.findById(request.getCommentId());
+
+    if (commentOptional.isEmpty()) {
+        throw new RuntimeException("Comment not found with id: " + request.getCommentId());
+    }
+
+    // 2. Get the comment
+    PostComment comment = commentOptional.get();
+
+    // 3. Increment the like count
+    int currentLikes = comment.getTotalLikes() != null ? comment.getTotalLikes() : 0;
+    if (request.getIsLiking()) {
+        comment.setTotalLikes(currentLikes + 1);
+    } else {
+        comment.setTotalLikes(Math.max(0, currentLikes - 1)); // prevent going below 0
+    }
+
+    // 4. Save the updated comment
+    PostComment updated = postCommentRepository.save(comment);
+
+    // 5. Map to DTO
+    PostCommentDTO dto = new PostCommentDTO();
+    dto.setId(updated.getId());
+    dto.setTotalLikes(updated.getTotalLikes());
+    dto.setCreatedAt(updated.getCreatedAt());
+
+    return dto;
+}
+
 
 }
 

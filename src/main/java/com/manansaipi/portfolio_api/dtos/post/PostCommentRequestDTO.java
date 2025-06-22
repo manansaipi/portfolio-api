@@ -1,15 +1,15 @@
 package com.manansaipi.portfolio_api.dtos.post;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import lombok.Data;
 
 @Data
+// this DTO is use to add comment to post
 public class PostCommentRequestDTO {
     private Long postId;
     private String comment;
     private String name;
-    private int totalLikes;
-    private LocalDate createdAt;
+    private Integer totalLikes;
+    private LocalDateTime createdAt;
 }
-// thsi DTO is use to add comment to post

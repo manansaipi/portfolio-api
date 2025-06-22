@@ -1,6 +1,6 @@
 package com.manansaipi.portfolio_api.models.post;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,9 +32,12 @@ public class PostComment {
     private String name;
     
     @Column(nullable = true, name = "created_at")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(nullable = true, name = "total_likes")
-    private int totalLikes;
+    private Integer totalLikes;
+
+    @Column(nullable = true, name = "is_verified")
+    private Boolean isVerified;
     
 }

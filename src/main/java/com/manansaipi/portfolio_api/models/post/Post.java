@@ -1,6 +1,6 @@
 package com.manansaipi.portfolio_api.models.post;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -31,7 +31,7 @@ public class Post {
     private String postImage;
 
     @Column(name = "created_at", nullable = true)
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
     
     @Column(name = "author", nullable = false )
     private String author;

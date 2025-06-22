@@ -12,5 +12,8 @@ public interface PostCommentRepository extends JpaRepository<PostComment, Long> 
 
         // This will automatically generate SQL: SELECT * FROM comments WHERE post_id = ?
         List<PostComment> findByPostId_Id(Long postId);
+        // SELECT * FROM comments WHERE post_id = ? ORDER BY created_at DESC
+        List<PostComment> findByPostId_IdOrderByCreatedAtDesc(Long postId);
+
 }
 
