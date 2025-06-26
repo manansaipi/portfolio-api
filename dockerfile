@@ -1,14 +1,18 @@
-# Use a lightweight OpenJDK 21 image (Java 24 not available yet in Alpine)
+# Use a lightweight OpenJDK 21 image (Alpine-based)
 FROM eclipse-temurin:21-jdk-alpine
 
-# Set working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the Maven build output JAR into the container
+
+# Copy the built JAR file into the container
 COPY target/portfolio-api-0.0.1-SNAPSHOT.jar app.jar
 
-# Expose the port Render uses
-EXPOSE 10000
+# Copy the .env file into the container
+COPY .env .env
 
-# Run the application
+# Expose the port used by the application (match your app's server.port)
+EXPOSE 3000
+
+# Run the JAR file
 ENTRYPOINT ["java", "-jar", "app.jar"]
