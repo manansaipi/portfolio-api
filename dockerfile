@@ -1,18 +1,27 @@
-# Use a lightweight OpenJDK 21 image (Alpine-based)
-FROM eclipse-temurin:21-jdk-alpine
+# ---- Stage 1: Build the application ----
+    FROM maven:3.9.6-eclipse-temurin-21-alpine AS build
 
-# Set the working directory inside the container
-WORKDIR /app
-
-
-# Copy the built JAR file into the container
-COPY target/portfolio-api-0.0.1-SNAPSHOT.jar app.jar
-
-# Copy the .env file into the container
-COPY .env .env
-
-# Expose the port used by the application (match your app's server.port)
-EXPOSE 3000
-
-# Run the JAR file
-ENTRYPOINT ["java", "-jar", "app.jar"]
+    WORKDIR /app
+    
+    # Copy Maven project files
+    COPY pom.xml .
+    COPY src ./src
+    
+    # Build the JAR file
+    RUN mvn clean install -DskipTests
+    
+    # ---- Stage 2: Create a lightweight image with only the JAR ----
+    FROM eclipse-temurin:21-jdk-alpine
+    
+    WORKDIR /app
+    
+    # Copy only the built JAR from the previous stage
+    COPY --from=build /app/target/portfolio-api-0.0.1-SNAPSHOT.jar app.jar
+    
+    # Copy the .env file into the container
+    COPY .env .env
+    
+    EXPOSE 3000
+    
+    ENTRYPOINT ["java", "-jar", "app.jar"]
+    
