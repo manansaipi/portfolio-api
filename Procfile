@@ -1,0 +1,1 @@
+web: java -Dserver.port=3000 -jar target/portfolio-api-0.0.1-SNAPSHOT.jar
