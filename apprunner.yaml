@@ -5,6 +5,6 @@ build:
     - mvn clean package -DskipTests
 
 run:
-  command: java -Xms256m -jar target/portfolio-api-0.0.1-SNAPSHOT.jar
+  command: java -jar target/portfolio-api-0.0.1-SNAPSHOT.jar -Xms256m
   network:
     port: 8080
