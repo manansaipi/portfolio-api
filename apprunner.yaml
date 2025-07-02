@@ -1,5 +1,7 @@
 version: 1.0
-runtime: java
+runtime: java17 
+runtime-version: 21
+
 build:
   commands:
     - mvn clean package -DskipTests
