@@ -9,13 +9,13 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class PortfolioApiApplication {
 
 	public static void main(String[] args) {
-  		// Dotenv dotenv = Dotenv.configure().load();
+  		Dotenv dotenv = Dotenv.configure().load();
 
-        // // Optional: Set them as system properties
-        // System.setProperty("DB_URL", dotenv.get("DB_URL"));
-        // System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
-        // System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
+        // Optional: Set them as system properties
+        System.setProperty("DB_URL", dotenv.get("DB_URL"));
+        System.setProperty("DB_USERNAME", dotenv.get("DB_USERNAME"));
+        System.setProperty("DB_PASSWORD", dotenv.get("DB_PASSWORD"));
 		
-		// SpringApplication.run(PortfolioApiApplication.class, args);
+		SpringApplication.run(PortfolioApiApplication.class, args);
 	}
 }

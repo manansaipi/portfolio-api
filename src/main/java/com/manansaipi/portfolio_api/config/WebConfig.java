@@ -14,11 +14,7 @@ public class WebConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                    .allowedOrigins(
-                        "http://localhost:5173",
-                        "https://portfolio-manansaipis-projects.vercel.app/",
-                        "https://www.manansaipi.saip/"
-                    )
+                    .allowedOrigins("*")
                     .allowedMethods("*")
                     .allowedHeaders("*");
             }
