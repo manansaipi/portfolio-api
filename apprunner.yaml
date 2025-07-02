@@ -1,0 +1,10 @@
+version: 1.0
+runtime: java
+build:
+  commands:
+    - mvn clean package -DskipTests
+
+run:
+  command: java -Xms256m -jar target/portfolio-api-0.0.1-SNAPSHOT.jar
+  network:
+    port: 8080
