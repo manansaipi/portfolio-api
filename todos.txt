@@ -1,0 +1,2 @@
+
+- when open the website, can't access the api from mobile phone
